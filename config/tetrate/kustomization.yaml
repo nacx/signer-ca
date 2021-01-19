@@ -15,4 +15,4 @@ patchesStrategicMerge:
 images:
 - name: controller
   newName: gcr.io/ignasi-permanent-ffxxqcd8/cert-manager/signer-ca-controller
-  newTag: d560ca1-dirty
+  newTag: demo
