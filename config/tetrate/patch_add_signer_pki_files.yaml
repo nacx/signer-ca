@@ -1,0 +1,30 @@
+# This patch mounts the CA key and certificate in the manager pod.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: signer-ca-controller-manager
+  namespace: signer-ca-system
+spec:
+  template:
+    spec:
+      containers:
+        - name: manager
+          args:
+          - -enable-leader-election
+          - -signer-name=tetrate.io/signer
+          - -ca-cert-path=/etc/pki/tetrate.io/signer/ca.pem
+          - -ca-key-path=/etc/pki/tetrate.io/signer/ca-key.pem
+          - -certificate-duration=10m
+          volumeMounts:
+            - name: etc-pki
+              mountPath: /etc/pki
+              readOnly: true
+      volumes:
+        - name: etc-pki
+          secret:
+            secretName: signer-ca
+            items:
+              - key: tls.key
+                path: tetrate.io/signer/ca-key.pem
+              - key: tls.crt
+                path: tetrate.io/signer/ca.pem

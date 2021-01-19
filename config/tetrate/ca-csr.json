@@ -1,0 +1,16 @@
+{
+  "CN": "Tetrate",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "US",
+      "L": "San Francisco",
+      "O": "Tetrate",
+      "OU": "Certification Authority",
+      "ST": "California"
+    }
+  ]
+}

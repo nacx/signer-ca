@@ -14,5 +14,5 @@ patchesStrategicMerge:
 - patch_add_signer_pki_files.yaml
 images:
 - name: controller
-  newName: quay.io/cert-manager/signer-ca-controller
+  newName: gcr.io/ignasi-permanent-ffxxqcd8/cert-manager/signer-ca-controller
   newTag: d560ca1-dirty

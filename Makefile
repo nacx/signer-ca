@@ -47,7 +47,7 @@ deploy: manifests
 	cd config/manager && kustomize edit set image controller=${DOCKER_IMAGE}
 	kustomize build config/default | kubectl apply -f -
 
-E2E_PKI = config/e2e
+E2E_PKI ?= config/e2e
 E2E_CA_CERT = ${E2E_PKI}/tls.crt
 E2E_CA_KEY = ${E2E_PKI}/tls.key
 E2E_CA = ${E2E_CA_KEY} ${E2E_CA_CERT}
@@ -59,8 +59,8 @@ ${E2E_CA}:
 	mv ${E2E_PKI}/tls{-key.pem,.key}
 
 deploy-e2e: ${E2E_CA}
-	cd config/e2e && kustomize edit set image controller=${DOCKER_IMAGE}
-	kustomize build config/e2e | kubectl apply -f -
+	cd ${E2E_PKI} && kustomize edit set image controller=${DOCKER_IMAGE}
+	kustomize build ${E2E_PKI} | kubectl apply -f -
 
 # Generate manifests e.g. CRD, RBAC etc.
 manifests: controller-gen
